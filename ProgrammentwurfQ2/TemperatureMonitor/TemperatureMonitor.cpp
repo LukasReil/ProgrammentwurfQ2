@@ -23,6 +23,9 @@ void TemperatureMonitor::notify(std::string producerID, std::string msg) {
 }
 
 void TemperatureMonitor::threadTask() {
-	std::cout << "Outside Temperature: " << m_outsideTemperature << "*C" << std::endl;
-	std::cout << "Inside Temperature:  " << m_outsideTemperature << "*C" << std::endl;
+	//Building String before printing, as multithreading may interfere with printing otherwise
+	std::string out = 
+		"Outside Temperature: " + std::to_string(m_outsideTemperature) + "*C\n" +
+		"Inside Temperature:  " + std::to_string(m_insideTemperature)  + "*C\n";
+	std::cout << out;
 }

@@ -7,3 +7,8 @@ Sensor::Sensor(std::string name, Umwelt* pUmwelt)
 std::string Sensor::send() {
 	return std::to_string(m_sensorValue);
 }
+
+Umwelt* Sensor::getUmwelt()
+{
+	return m_pUmwelt;
+}

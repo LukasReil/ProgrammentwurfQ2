@@ -5,5 +5,5 @@ InsideTemperatureSensor::InsideTemperatureSensor(int insideTemperatureSensorID, 
 }
 
 void InsideTemperatureSensor::measure() {
-	m_sensorValue = m_pUmwelt->getInsideTemp();
+	m_sensorValue = getUmwelt()->getInsideTemp();
 }

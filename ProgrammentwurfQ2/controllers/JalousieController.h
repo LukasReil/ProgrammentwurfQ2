@@ -3,12 +3,10 @@
 #include <string>
 #include <atomic>
 
-#include "../api/Producer.h"
-#include "../api/Dispatcher.h"
-#include "../apiWrapper/CustomConsumer.h"
+#include "Controller.h"
 
 
-class JalousieController : public Producer, public CustomConsumer {
+class JalousieController : public Controller {
 public:
 	JalousieController(int jalousieControllerID);
 	virtual void notify(std::string producerID, std::string msg);

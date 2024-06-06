@@ -1,0 +1,12 @@
+----Polymorphie----
+
+Ich habe Polymorphie an vielen Stellen verwendet. Bereits die Basisklassen der API (Consumer, Producer, etc.) benutzen Polymorphie, um einen effizienten Datenaustausch zu erlauben.
+Besonders gut sieht man die Vorteile der Polymorphie in meiner Multithreading Implementation.
+In der Datei multithreading/CustomThread.h wird die Basisklasse für eine einfache Multithreading Implementation definiert.
+In der Datei multithreading/CustomThread.cpp werden alle Funktionen bis auf "threadTask()" definiert.
+So kann z.B. in der Datei Sensors/SensorMeasureThread.cpp Zeile 6-10 definiert. 
+Das erlaubt eine häufige Wiederverwendung des Multithreading Codes, was gerade bei asynchronen Sensoren und Aktoren häufig der Fall ist.
+So konnte ich einmal eine sinnvolle Multithreading Lösung implementieren und die benutzenden Klassen bleiben kleine und gut lesbar.
+Gerade bei komplizierteren Funktionen (wie Mulithreading) muss so weniger Code geschrieben, maintained und später wieder verstanden werden.
+Hätte ich einen nicht polymorphen Ansatz gewählt, so hätte ich evtl. eine Funktion als Parameter übergeben können, was häufig aber starke Limitationen mit sich bringt oder nur schlect lesbar wäre.
+Ein anderer Ansatz wäre in jeder Klasse das Mulithreading neu zu implementieren, was hier kein großer Aufwand wäre, allerdings die wichtigen Funktionen deutlich hätte untergehen lassen.

@@ -21,7 +21,7 @@ int main()
 	using namespace std::chrono_literals;
 
 	Umwelt umwelt;
-	CustomDispatcher customDispatcher(100ms);
+	CustomDispatcher customDispatcher(50ms);
 
 	InsideTemperatureSensor insideTempSensor(0, &umwelt);
 	OutsideTemperatureSensor outsideTempSensor(0, &umwelt);
@@ -31,14 +31,14 @@ int main()
 	customDispatcher.registerProducer(&outsideTempSensor);
 	customDispatcher.registerProducer(&sunIntensitySensor);
 
-	TemperatureMonitor tempMonitor(1000ms);
+	TemperatureMonitor tempMonitor(50ms);
 	tempMonitor.registerAtDispatcher(&customDispatcher);
 
 	JalousieController jalousieController1(0);
 	jalousieController1.registerAtDispatcher(&customDispatcher);
 	customDispatcher.registerProducer(&jalousieController1);
 
-	Jalousie jalousie1(0, 500ms);
+	Jalousie jalousie1(0, 50ms);
 	jalousie1.registerAtDispatcher(&customDispatcher);
 
 

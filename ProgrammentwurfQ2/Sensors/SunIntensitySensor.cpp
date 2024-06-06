@@ -7,5 +7,5 @@ SunIntensitySensor::SunIntensitySensor(int sunIntensitySensorID, Umwelt* pUmwelt
 
 void SunIntensitySensor::measure()
 {
-	m_sensorValue = m_pUmwelt->getSunIntensity();
+	m_sensorValue = getUmwelt()->getSunIntensity();
 }

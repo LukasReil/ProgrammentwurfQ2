@@ -7,5 +7,5 @@ OutsideTemperatureSensor::OutsideTemperatureSensor(int outsideTemperatureSensorI
 
 void OutsideTemperatureSensor::measure()
 {
-	m_sensorValue = m_pUmwelt->getOutsideTemp();
+	m_sensorValue = getUmwelt()->getOutsideTemp();
 }

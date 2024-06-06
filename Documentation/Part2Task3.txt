@@ -1,0 +1,19 @@
+----Sichtbarkeit von Attributen----
+
+Ich habe alle Attribute private gehalten, da beinahe alle Attribute nur von der Basisklasse benötigt werden.
+Sollte dies nicht der Fall sein, so habe ich ein Getterfunktion implementiert um auf ein Attribut zugreifen zu können (siehe Sensors/Sensor.h Z. 15, 20).
+Die Klasse Sensor beinhaltet außerdem die einzige Ausnahme von dieser Regel, das Attribut "m_sensorValue".
+Dieses wird regelmäßig von jedem Sensor beschrieben. Da hier ein voller Lese- und Schreibzugriff sinnvoll sind, habe ich mich entschieden das Member als protected zu markieren (siehe Sensors/Sensor.h Z. 16-18).
+Es ist nicht public, da externe Objekte keinen Zugriff auf den tatsächlichen Messwert benötigen, da jede Kommunikation durch den Dispatcher läuft.
+Ein weiterer Grund für protected an dieser Stelle war eine bessere Lesbarkeit.
+Durch die explizite Schreibweise als protected wird klar, dass das Attribut auch in abgeleiteten Klassen sichtbar ist, was auch durch den Kommentar darüber signalisiert wird.
+Es dürften wenig Unklarheiten beim Lesen des Codes in z.B. Sensors/InsideTemperatureSensor.cpp entstehen, da explizit die SensorValue auf einen gemessenen Wert gesetzt werden.
+Unterm Strich sind damit alle Bedingungen für die Wahl von protected erfüllt:
+ - eingeschränkter (nicht vorhandener) Zugriff von außen sinnvoll
+ - voller Zugriff von Subklassen sinnvoll, da lesbarer als triviale Getter/Setter Implementation
+
+Alle anderen Member sind private, da Kapselung immer ein wichtiger Aspekt für gut maintainbaren Code ist.
+Sollte das Projekt von anderen weitergeführt werden, müssen sich diese keine Gedanken um interne Implementation machen.
+Sollte z.B. jemand anderes die intern Struktur einer Klasse ändern, so muss nichts an anderen (evtl. auch abgeleiteten Klassen) verändert werden.
+Nachteilig wäre ein erhöhter Aufwand für berechtigen Zugriff von Außen durch Getter/Setter, die Vorteile wiegen das aber deutlich auf und sind meiner Ansicht nach wichtiger.
+Gerade hier gibt es allerdings beinahe keinen berechtigten Zugriff.

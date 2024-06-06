@@ -6,15 +6,14 @@
 #include <chrono>
 
 #include "../api/Dispatcher.h"
-#include "../api/Consumer.h"
+#include "../apiWrapper/CustomConsumer.h"
 #include "../multithreading/CustomThread.h"
 
-class TemperatureMonitor : public Consumer, public CustomThread {
+class TemperatureMonitor : public CustomConsumer, public CustomThread {
 public:
 	TemperatureMonitor(std::chrono::milliseconds printInterval);
 	~TemperatureMonitor();
 	virtual void notify(std::string producerID, std::string msg);
-	void registerAtDispatcher(Dispatcher* pDispatcher);
 	virtual void threadTask();
 private:
 	std::atomic<double> m_outsideTemperature{ 0 };

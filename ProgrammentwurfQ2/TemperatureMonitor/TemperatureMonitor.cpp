@@ -4,7 +4,7 @@ const std::string TemperatureMonitor::outsideTemperatureSensorID{ "OutsideTemper
 const std::string TemperatureMonitor::insideTemperatureSensorID{ "InsideTemperatureSensor0" };
 
 TemperatureMonitor::TemperatureMonitor(std::chrono::milliseconds printInterval)
-	: CustomThread::CustomThread(printInterval) {}
+	: CustomThread::CustomThread(printInterval), CustomConsumer::CustomConsumer(std::vector<std::string>{outsideTemperatureSensorID, insideTemperatureSensorID}) {}
 
 TemperatureMonitor::~TemperatureMonitor() {
 	stopThread();
@@ -14,19 +14,11 @@ void TemperatureMonitor::notify(std::string producerID, std::string msg) {
 
 	double msgDouble = strtod(msg.c_str(), nullptr);
 
-	//std::cout << "Msg from " << producerID << ": \"" << msg << "\"" << std::endl;
-
 	if (producerID == outsideTemperatureSensorID) {
 		m_outsideTemperature = msgDouble;
 	}
 	else if (producerID == insideTemperatureSensorID) {
 		m_insideTemperature = msgDouble;
-	}
-}
-
-void TemperatureMonitor::registerAtDispatcher(Dispatcher* pDispatcher) {
-	if (!pDispatcher->subscribe(outsideTemperatureSensorID, this) || !pDispatcher->subscribe(insideTemperatureSensorID, this)) {
-		throw "TemperatureMonitor failed to subscribe to Temperature Sensors! Are the IDs spelled correctly?";
 	}
 }
 

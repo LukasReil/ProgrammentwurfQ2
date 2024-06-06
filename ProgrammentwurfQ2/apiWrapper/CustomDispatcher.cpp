@@ -1,31 +1,10 @@
 #include "CustomDispatcher.h"
 
 CustomDispatcher::CustomDispatcher(std::chrono::milliseconds dispatchInterval)
-	: Dispatcher::Dispatcher(), m_dispatchInterval(dispatchInterval){
-}
+	: Dispatcher::Dispatcher(), CustomThread::CustomThread(dispatchInterval) {}
 
-void CustomDispatcher::run(CustomDispatcher* pSelf) {
-
-	pSelf->m_running = true;
-	while (!pSelf->m_shutdown) {
-		// Does the magic
-		pSelf->dispatchMessages();
-
-		// Lets Dispatcher sleep for a second
-		this_thread::sleep_for(pSelf->m_dispatchInterval);
-	}
-	pSelf->m_running = false;
-}
-
-void CustomDispatcher::startThread() {
-	m_shutdown = false;
-	std::thread thread(run, this);
-	thread.detach();
-}
-
-void CustomDispatcher::stopThread() {
-	m_shutdown = true;
-	while (m_running);
+void CustomDispatcher::threadTask() {
+	dispatchMessages();
 }
 
 bool CustomDispatcher::registerProducer(Producer* pProducer) {
@@ -38,6 +17,7 @@ bool CustomDispatcher::registerProducer(Producer* pProducer) {
 }
 
 bool CustomDispatcher::subscribe(std::string producerId, Consumer* pConsumer) {
+
 	if (!m_registeredProducers.contains(producerId)) {
 		return false;
 	}
@@ -59,5 +39,4 @@ void CustomDispatcher::dispatchMessages() {
 			consumer->first->notify(producerID, receivedMessages[producerID]);
 		}
 	}
-
 }

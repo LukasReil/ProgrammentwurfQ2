@@ -5,16 +5,12 @@
 #include <vector>
 #include <chrono>
 #include "Sensor.h"
+#include "../multithreading/CustomThread.h"
 
-class SensorMeasureThread {
+class SensorMeasureThread : public CustomThread {
 public:
 	SensorMeasureThread(const std::vector<Sensor*>& sensors, std::chrono::milliseconds measureInterval);
-	static void run(SensorMeasureThread* pSelf);
-	void startThread();
-	void stopThread();
+	virtual void threadTask();
 private:
-	std::atomic_bool m_shutdown{ true };
-	std::atomic_bool m_running{ false };
-	std::chrono::milliseconds m_measureInterval;
 	std::vector<Sensor*> m_sensors;
 };

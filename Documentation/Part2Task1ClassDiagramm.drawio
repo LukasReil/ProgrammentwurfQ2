@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-06-06T17:33:00.741Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 OPR/109.0.0.0" etag="SabYOsjmwkLiuunL1vwl" version="24.5.1" type="github">
+<mxfile host="app.diagrams.net" modified="2024-06-06T17:34:34.062Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 OPR/109.0.0.0" etag="m_DjU7MBC-nxuQzCBxeV" version="24.5.1" type="github">
   <diagram name="Seite-1" id="HuxqZvGwyWdmQKOLDSLv">
     <mxGraphModel dx="4558" dy="1663" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="2336" math="0" shadow="0">
       <root>
@@ -100,7 +100,7 @@
         <mxCell id="aqTYaaXzma2y87ziOGR_-47" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;threadTask()&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;startThread()&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;stopThread()&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="aqTYaaXzma2y87ziOGR_-46">
           <mxGeometry y="130" width="260" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="aqTYaaXzma2y87ziOGR_-48" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;shutdown&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;running&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;executionInterval&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="aqTYaaXzma2y87ziOGR_-46">
+        <mxCell id="aqTYaaXzma2y87ziOGR_-48" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;shutdown: bool&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;running: bool&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;executionInterval: milliseconds&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="aqTYaaXzma2y87ziOGR_-46">
           <mxGeometry y="40" width="260" height="90" as="geometry" />
         </mxCell>
         <mxCell id="aqTYaaXzma2y87ziOGR_-49" value="&lt;font size=&quot;1&quot;&gt;&lt;b style=&quot;font-size: 16px;&quot;&gt;CustomThread&lt;/b&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="aqTYaaXzma2y87ziOGR_-46">

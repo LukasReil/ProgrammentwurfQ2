@@ -3,11 +3,13 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include <thread>
 #include <atomic>
 #include <chrono>
 
 #include "../api/Dispatcher.h"
+#include "../api/Consumer.h"
+#include "../api/Producer.h"
+
 #include "../multithreading/CustomThread.h"
 
 class CustomDispatcher : public Dispatcher, public CustomThread {

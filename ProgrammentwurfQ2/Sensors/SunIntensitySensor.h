@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../api/Umwelt.h"
+
 #include "Sensor.h"
 
 class SunIntensitySensor : public Sensor {

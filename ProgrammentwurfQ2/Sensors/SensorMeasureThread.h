@@ -1,11 +1,11 @@
 #pragma once
 
-#include <thread>
-#include <atomic>
 #include <vector>
 #include <chrono>
+
 #include "Sensor.h"
 #include "../multithreading/CustomThread.h"
+
 
 class SensorMeasureThread : public CustomThread {
 public:

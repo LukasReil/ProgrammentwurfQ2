@@ -4,7 +4,7 @@
 #include <string>
 
 #include "../api/Producer.h"
-#include "../api/Dispatcher.h"
+
 #include "../apiWrapper/CustomConsumer.h"
 
 class Controller : public Producer, public CustomConsumer {

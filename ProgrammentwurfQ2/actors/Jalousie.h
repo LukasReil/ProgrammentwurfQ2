@@ -5,8 +5,9 @@
 #include <iostream>
 #include <string>
 
-#include "../apiWrapper/CustomConsumer.h"
 #include "../api/Dispatcher.h"
+
+#include "../apiWrapper/CustomConsumer.h"
 #include "../multithreading/CustomThread.h"
 
 class Jalousie : public CustomConsumer, public CustomThread {

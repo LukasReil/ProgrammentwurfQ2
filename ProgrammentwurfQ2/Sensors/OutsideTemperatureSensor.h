@@ -2,9 +2,9 @@
 
 #include "../api/Umwelt.h"
 
-#include "Sensor.h"
+#include "UmweltSensor.h"
 
-class OutsideTemperatureSensor : public Sensor {
+class OutsideTemperatureSensor : public UmweltSensor {
 public:
 	OutsideTemperatureSensor(int outsideTemperatureSensorID, Umwelt* pUmwelt);
 	virtual void measure();

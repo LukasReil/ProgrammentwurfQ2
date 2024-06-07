@@ -1,11 +1,8 @@
 #include "OutsideTemperatureSensor.h"
 
 OutsideTemperatureSensor::OutsideTemperatureSensor(int outsideTemperatureSensorID, Umwelt* pUmwelt)
-	: Sensor::Sensor("OutsideTemperatureSensor" + std::to_string(outsideTemperatureSensorID), pUmwelt)
-{
-}
+	: UmweltSensor::UmweltSensor("OutsideTemperatureSensor" + std::to_string(outsideTemperatureSensorID), pUmwelt) {}
 
-void OutsideTemperatureSensor::measure()
-{
+void OutsideTemperatureSensor::measure() {
 	m_sensorValue = getUmwelt()->getOutsideTemp();
 }

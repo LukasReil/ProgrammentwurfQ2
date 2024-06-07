@@ -4,15 +4,17 @@
 #include <string>
 #include <vector>
 #include <chrono>
-#include "TemperatureMonitor/TemperatureMonitor.h"
+
+#include "api/Umwelt.h"
+
 #include "apiWrapper/CustomDispatcher.h"
 #include "Sensors/InsideTemperatureSensor.h"
 #include "Sensors/OutsideTemperatureSensor.h"
 #include "Sensors/SunIntensitySensor.h"
 #include "Sensors/SensorMeasureThread.h"
-#include "actors/Jalousie.h"
+#include "TemperatureMonitor/TemperatureMonitor.h"
+#include "actors/JalousieSteuerung.h"
 #include "controllers/JalousieController.h"
-#include "api/Umwelt.h"
 
 
 int main()
@@ -27,26 +29,36 @@ int main()
 	OutsideTemperatureSensor outsideTempSensor(0, &umwelt);
 	SunIntensitySensor sunIntensitySensor(0, &umwelt);
 
+	JalousieController jalousieController1(0);
+	TemperatureMonitor tempMonitor(50ms);
+	JalousieSteuerung jalousieSteuerung1(0, 0, 50ms);
+
+	//Register Producers
 	customDispatcher.registerProducer(&insideTempSensor);
 	customDispatcher.registerProducer(&outsideTempSensor);
 	customDispatcher.registerProducer(&sunIntensitySensor);
+	customDispatcher.registerProducer(&jalousieSteuerung1);
 
-	TemperatureMonitor tempMonitor(50ms);
-	tempMonitor.registerAtDispatcher(&customDispatcher);
+	//Register Controllers
+	try {
+		jalousieController1.registerAtDispatcher(&customDispatcher);
 
-	JalousieController jalousieController1(0);
-	jalousieController1.registerAtDispatcher(&customDispatcher);
-	customDispatcher.registerProducer(&jalousieController1);
-
-	Jalousie jalousie1(0, 50ms);
-	jalousie1.registerAtDispatcher(&customDispatcher);
+		//Register Consumers
+		tempMonitor.registerAtDispatcher(&customDispatcher);
+		jalousieSteuerung1.registerAtDispatcher(&customDispatcher);
+	}
+	catch (std::string e) {
+		std::cout << e << std::endl;
+		return -1;
+	}
 
 
 	tempMonitor.startThread();	
 	customDispatcher.startThread();
-	SensorMeasureThread sensorMeasureThread(std::vector<Sensor*>{&insideTempSensor, &outsideTempSensor, &sunIntensitySensor}, 100ms);
+	SensorMeasureThread sensorMeasureThread(std::vector<Sensor*>{&insideTempSensor, &outsideTempSensor, &sunIntensitySensor, &jalousieSteuerung1}, 100ms);
 	sensorMeasureThread.startThread();
-	jalousie1.startThread();
+	//jalousieController1.startThread();
+	jalousieSteuerung1.startThread();
 	
 
 	std::cin.get();
@@ -54,7 +66,8 @@ int main()
 	tempMonitor.stopThread();
 	sensorMeasureThread.stopThread();
 	customDispatcher.stopThread();
-	jalousie1.stopThread();
+	//jalousieController1.stopThread();
+	jalousieSteuerung1.stopThread();
 
 	return 0;
 }

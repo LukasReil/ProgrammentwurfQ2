@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt: CMake-Projektdatei der obersten Ebene. Führen Sie hier die globale Konfiguration aus,
 # und schließen Sie Unterprojekte ein.
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.20)
 
 # Aktivieren Sie Hot Reload für MSVC-Compiler, sofern unterstützt.
 if (POLICY CMP0141)
@@ -13,3 +13,5 @@ project ("ProgrammentwurfQ2")
 
 # Schließen Sie Unterprojekte ein.
 add_subdirectory ("ProgrammentwurfQ2")
+
+

@@ -1,7 +1,7 @@
 #include "InsideTemperatureSensor.h"
 
 InsideTemperatureSensor::InsideTemperatureSensor(int insideTemperatureSensorID, Umwelt* pUmwelt)
-	: Sensor::Sensor("InsideTemperatureSensor" + std::to_string(insideTemperatureSensorID), pUmwelt) {
+	: UmweltSensor::UmweltSensor("InsideTemperatureSensor" + std::to_string(insideTemperatureSensorID), pUmwelt) {
 }
 
 void InsideTemperatureSensor::measure() {

@@ -9,11 +9,13 @@
 
 #include "../apiWrapper/CustomConsumer.h"
 #include "../multithreading/CustomThread.h"
+#include "../Sensors/Sensor.h"
 
-class Jalousie : public CustomConsumer, public CustomThread {
+class JalousieSteuerung : public CustomConsumer, public Sensor, public CustomThread {
 public:
-	Jalousie(int controllerToListenTo, std::chrono::milliseconds jalousieStatusPrintInterval);
+	JalousieSteuerung(int controllerToListenTo, int jalousieID, std::chrono::milliseconds jalousieStatusPrintInterval);
 	virtual void threadTask();
+	virtual void measure();
 	virtual void notify(std::string producerID, std::string msg);
 private:
 	//1: Closed 0: Open

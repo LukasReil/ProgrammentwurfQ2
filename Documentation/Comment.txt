@@ -1,0 +1,3 @@
+The Umwelt.getSunIntensity() function is broken and returns values from -860 to ca. 940%.
+This might severly alter the function of the program, depending on the implementation you might compare against.
+

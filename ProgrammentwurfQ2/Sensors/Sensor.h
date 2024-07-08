@@ -5,6 +5,10 @@
 
 #include "../api/Producer.h"
 
+/*
+* Sensor class to wrap the abstract Producer and supply additional functionality
+* like adding a virtual function for asynchronous measuring
+*/
 class Sensor : public Producer {
 public:
 	Sensor(std::string name);

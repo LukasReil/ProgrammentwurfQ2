@@ -1,3 +1,5 @@
 The Umwelt.getSunIntensity() function is broken and returns values from -860 to ca. 940%.
 This might severly alter the function of the program, depending on the implementation you might compare against.
 
+As requested a screenshot of the build process can be found in BuildProcessScreenshot.png
+This was a clean build, so everything was built again an not errors or warning occured.

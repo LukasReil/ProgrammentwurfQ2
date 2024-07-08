@@ -18,3 +18,5 @@ welche dann in einem spezifiziertem Intervall aufgerugen wird.
 Mit startThread() wird ein asynchroner Thread erzeugt, welcher sich vom Rest des Programms abkoppelt.
 Mit stopThread() wird die wiederholte Ausführung beendet, sofern der Thread nicht eingefrohren ist.
 Das dies in diesem simplen Programm nicht passieren kann (sollte), wurde auf ein Handling dieses Falles verzichtet.
+
+Siehe: Part2Task1ClassDiagramm.drawio.png

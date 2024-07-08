@@ -20,10 +20,10 @@
 int main()
 {
 
-	using namespace std::chrono_literals;
+	using namespace std::chrono_literals; 
 
 	Umwelt umwelt;
-	CustomDispatcher customDispatcher(50ms);
+	CustomDispatcher customDispatcher(10ms);
 
 	InsideTemperatureSensor insideTempSensor(0, &umwelt);
 	OutsideTemperatureSensor outsideTempSensor(0, &umwelt);
@@ -37,27 +37,25 @@ int main()
 	customDispatcher.registerProducer(&insideTempSensor);
 	customDispatcher.registerProducer(&outsideTempSensor);
 	customDispatcher.registerProducer(&sunIntensitySensor);
-	customDispatcher.registerProducer(&jalousieSteuerung1);
 
-	//Register Controllers
+	jalousieController1.preRegisterAtCustomDispatcher(&customDispatcher);
+
+	//Register Consumers
+	tempMonitor.preRegisterAtCustomDispatcher(&customDispatcher);
+	jalousieSteuerung1.preRegisterAtCustomDispatcher(&customDispatcher);
+	
+
+
 	try {
-		jalousieController1.registerAtDispatcher(&customDispatcher);
-
-		//Register Consumers
-		tempMonitor.registerAtDispatcher(&customDispatcher);
-		jalousieSteuerung1.registerAtDispatcher(&customDispatcher);
+		customDispatcher.startThread();
 	}
-	catch (std::string e) {
-		std::cout << e << std::endl;
+	catch (CustomDispatcher::SubscriptionException e) {
+		e.print();
 		return -1;
 	}
-
-
-	tempMonitor.startThread();	
-	customDispatcher.startThread();
+	tempMonitor.startThread();
 	SensorMeasureThread sensorMeasureThread(std::vector<Sensor*>{&insideTempSensor, &outsideTempSensor, &sunIntensitySensor, &jalousieSteuerung1}, 100ms);
 	sensorMeasureThread.startThread();
-	//jalousieController1.startThread();
 	jalousieSteuerung1.startThread();
 	
 
@@ -66,7 +64,6 @@ int main()
 	tempMonitor.stopThread();
 	sensorMeasureThread.stopThread();
 	customDispatcher.stopThread();
-	//jalousieController1.stopThread();
 	jalousieSteuerung1.stopThread();
 
 	return 0;

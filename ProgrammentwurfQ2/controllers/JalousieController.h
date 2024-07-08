@@ -7,7 +7,11 @@
 
 #include "Controller.h"
 
-
+/*
+* Specific controller for a Jalousie.
+* Measures temperature inside of a house and outside sun intensity 
+* to determine how much a jalousie shall be open/closed
+*/
 class JalousieController : public Controller {
 public:
 	JalousieController(int jalousieControllerID);

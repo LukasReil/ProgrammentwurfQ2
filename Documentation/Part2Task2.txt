@@ -1,2 +1,10 @@
 ----Vererbung----
 
+Ich habe Vererbung bei praktisch jeder Klasse angewendet, welche nicht gerade eine Mutterklasse darstellt.
+Z.B. erbt der CustomConsumer von der abstrakten Consumer Klasse. 
+Er vordefiniert z.B. die Funktion preRegisterAtCustomDispatcher(...) (siehe apiWrapper/CustomConsumer.cpp Z. 26-30).
+So muss nicht in jeder ander Subklasse eine eigene Implementation geschrieben werden, was die Benutzerfreundlichkeit erhöht, aber auch die Produktion einfacher gemacht hat.
+Ein CustomConsumer muss jedes mal nur eine Liste an zu subscribenden Producern definieren, die eigentlichen API-Calls bleiben aber vom Nutzer verborgen,
+was gerade bei größeren Bibliotheken und Anwendungen sinnvoll ist, da so interne Änderungen nicht auf den Nutzer abfallen.
+Aber auch hier macht das durchaus Sinn, da sich mein Handling der Registrierung öfter geändert hat, und ich damit nur diese eine Datei abändern musste, die Unterklassen blieben davon aber unberührt.
+Das vermeidet außerdem deutlich die Fehlerquote, da beim Ändern in mehrern Klassen höchstwahrscheinlich Fehler auftreten würden.

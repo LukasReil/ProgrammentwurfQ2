@@ -1,2 +1,20 @@
 ----Archtitektur----
 
+Meine Architektur basiert auf dem geforderten Dispatcher-Pattern.
+Jede der dazu gehörigen Klassen (Dispatcher, Consumer & Producer) besitzen mindestens eine zugehörige Klasse, welche von ihr erbt.
+Consumer und Dispatcher besitzen seperate Wrapper-Klassem (Custom-Dispatcher/Consumer), während der Producer differenzierter verwendet wird. 
+Er besitzt die Subklassen Controller und Sensor. Es gibt keinen zentralen Wrapper für den Producer, da daraus kein Mehrweg entstehen würde, 
+da alle erbenden Klassen sehr unterschiedliche Dinge tun, während beim Consumer viele Dinge zentraler zu regeln waren.
+Besonders die Registrierung beim Dispatcher habe ich etwas eigen gestaltet, um eine Registrierung eines Consumers vor dem zugehörigen Producer zu erlauben.
+Das muss zwar nicht sein, macht aus meiner Sicht aber Sinn, da so Controller durch einen Funktionsaufruf registriert werden können.
+Andernfalls müssten erst die internen Producer und dann die internen Consumer aller Controller geladen werden, was ich für nicht erwartbar halte.
+Alle Sensoren erben von der Sensor Klasse. Diese besitzt eine weitere, abstrakte Subklasse Umweltsensor.
+Diese Differenzierung wurde gemacht, um Sensoren mit Referenz zur Umwelt von denen ohne diese Eigenschaft zu trennen.
+So gibt es zum Beispiel den Sensor für den Zustand der Jalousie, welcher keine Umweltreferenz benötigt.
+Manche Klassen erben von meiner Klasse CustomThread. Diese Klasse dient als einfacher Zugang zu Multithreading,
+was die asynchrone Funktion des Systems zeigen soll. 
+Um eine Aufgabe asynchron zum Rest des Programms laufen zu lassen, muss erst die Funktion threadTask() implementiert werden,
+welche dann in einem spezifiziertem Intervall aufgerugen wird.
+Mit startThread() wird ein asynchroner Thread erzeugt, welcher sich vom Rest des Programms abkoppelt.
+Mit stopThread() wird die wiederholte Ausführung beendet, sofern der Thread nicht eingefrohren ist.
+Das dies in diesem simplen Programm nicht passieren kann (sollte), wurde auf ein Handling dieses Falles verzichtet.
